@@ -1,0 +1,32 @@
+body{
+  background-color: #f4b642;
+}
+.first{
+  margin-top:5%;
+    margin-left:30%;
+    margin-bottom:10%;
+    margin-right:30%;
+
+  background-color: #42403d;
+  padding-left: 4%;
+  padding-top: 2%;
+}
+h3
+{
+  color: white;
+}
+.search
+{
+  background-color:#b3ffd9;
+   margin-left:30%;
+    margin-top:10px;
+    width:300px;
+    height:40px;
+    border-radius:20;
+}
+.button
+{
+    height:40px;
+    font-size: 16px;
+
+}

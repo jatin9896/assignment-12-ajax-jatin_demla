@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="screen" title="no title">
+      <script  src="https://code.jquery.com/jquery-3.1.1.min.js"  crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title> Git Users</title>
+     <link rel="stylesheet" type="text/css" href="mycss.css">
+
+    </script>
+  </head>
+  <body>
+      <input id="username" name="username" type=text class="search" />
+      <button id="get-data">Get User</button>
+    <div class="first">
+
+    <img width="300px" height="300px" src="user.png" id="user-image"></img>
+    <h3 style="color:white">User Data</h3>
+    <h3 id="user-name"></h3><br>
+    <h3 id="company"></h3><br>
+    <h3 id="email"></h3><br>
+    <h3 id="createdAt"></h3><br>
+    <h3 id="location"></h3><br>
+    <h3 id="url"></h3><br>
+    </div>
+    <script>
+      $(document).ajaxStart(function(){
+        $("#user-image").attr("src","progress.gif");
+      }).ajaxStop(function(){
+        console.log("Ajax Stopped.")
+      }).ajaxSuccess(function(){
+        console.log("Ajax Success")
+      }).ajaxComplete(function(){
+        console.log("Ajax Completed")
+      })
+
+      $("#get-data").on("click",function(){
+        var username = $("#username").val();
+        $.ajax({
+          url:"https://api.github.com/users/"+username,
+          success: function(data){
+            console.log(data)
+            $("#user-image").attr("src",data.avatar_url);
+            $("#user-name").text("User id is : "+data.id);
+            $("#company").text("User company is : "+data.company);
+            $("#email").text("User email is : "+data.email);
+            $("#location").text("User location is : "+data.location);
+            $("#url").text("User url is : "+data.url);
+            $("#createdAt").text("User Account Creation Date is : "+data.createdAT);
+            $("#user-name").text("UserName is : "+data.name);
+
+          },
+          error: function(){
+            $("#user-image").attr("src","no-user.png");
+            $("#user-name").text("User not found");
+          }
+        })
+
+      //   var xhttp = new XMLHttpRequest();
+      //   xhttp.onreadystatechange = function() {
+      //     if (this.readyState == 4 && this.status == 200) {
+      //       var res = JSON.parse(this.response)
+      //       $("#user-image").attr("src",res.avatar_url);
+      //       $("#user-name").text("User id is : "+res.id);
+      //     }
+      //     if (this.readyState == 4 && this.status == 404){
+      //       $("#user-image").attr("src","user.png");
+      //       $("#user-name").text("User not found");
+      //     }
+      //   };
+      //   xhttp.open("GET", "https://api.github.com/users/"+username, true);
+      //   xhttp.send();
+       })
+    </script>
+  </body>
+</html>
